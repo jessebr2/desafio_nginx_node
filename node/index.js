@@ -15,7 +15,7 @@ const sql = "INSERT INTO people(name) values('Jesse')"
 connection.query(sql)
 
 app.get('/', (req, res) => {
-    let html_response = 'Full Cycle'
+    let html_response = ' <h1>Full Cycle Rocks!</h1>'
     connection.query('SELECT * FROM people', function (error, results, fields) {
         if (error) throw error;
         for (const result of results) {
