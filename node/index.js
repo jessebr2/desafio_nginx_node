@@ -10,27 +10,7 @@ const config = {
 const mysql = require('mysql');
 const { VAR_STRING } = require('mysql/lib/protocol/constants/types');
 const connection = mysql.createConnection(config)
-function sleep(milliseconds) {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-      currentDate = Date.now();
-    } while (currentDate - date < milliseconds);
-}
-
-function check_table(){
-    const connection1 = mysql.createConnection(config)
-    connection1.query('SELECT * FROM people', function (error, results, fields) {
-        if (error) {
-            connection.query("create table people(id int not null auto_increment, name varchar(255), primary key(id))")
-            console.log('Tabela criada')
-            sleep(3000)
-        }
-    });
-    connection1.end()
-}
-check_table()
-
+connection.query("create table if not exists people(id int not null auto_increment, name varchar(255), primary key(id))")
 const sql = "INSERT INTO people(name) values('Jesse')"
 connection.query(sql)
 
